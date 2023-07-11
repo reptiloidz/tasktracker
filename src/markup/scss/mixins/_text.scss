@@ -1,0 +1,13 @@
+@mixin text($fz, $fw: n, $lh: 1) {
+	$fz: var(--fz-#{$fz});
+	$fw: var(--fw-#{$fw});
+	$lh: var(--lh-#{$lh});
+
+	--text-fz: #{$fz};
+	--text-fw: #{$fw};
+	--text-lh: #{$lh};
+
+	font-size: var(--text-fz);
+	font-weight: var(--text-fw);
+	line-height: var(--text-lh);
+}

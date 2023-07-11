@@ -1,0 +1,28 @@
+.row {
+	--gutter-x: #{$columns-gutter-x-default};
+	--gutter-y: 0;
+	--grid-columns: #{$columns};
+
+	@include make-css-grid-cols;
+
+	display: grid;
+	grid-template-columns: repeat(var(--grid-columns), 1fr);
+	gap: var(--gutter-y) var(--gutter-x);
+	height: fit-content;
+
+	> * {
+		grid-column: auto/span var(--grid-columns);
+	}
+
+	&--auto-cols {
+		grid-template-columns: auto;
+		grid-auto-flow: column;
+		width: fit-content;
+
+		> * {
+			grid-column: auto;
+		}
+	}
+}
+
+@include make-css-grid-rows;

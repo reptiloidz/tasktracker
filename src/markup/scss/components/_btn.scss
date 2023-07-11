@@ -1,0 +1,40 @@
+.btn {
+	@include btn;
+	@include text(sm);
+
+	--btn-bg-cl: var(--btn-main-bg-cl);
+	--btn-cl: var(--btn-main-cl);
+	--btn-brs: var(--btn-main-brs);
+	--btn-p: var(--btn-main-p);
+	--btn-min-w: var(--btn-main-min-w);
+
+	background-color: var(--btn-bg-cl);
+	color: var(--btn-cl);
+	border-radius: var(--btn-brs);
+	padding: var(--btn-p);
+	min-width: var(--btn-min-w);
+
+	&__inner {
+		display: flex;
+	}
+
+	&--primary {
+		--btn-bg-cl: var(--btn-primary-bg-cl);
+		--btn-cl: var(--btn-primary-cl);
+	}
+
+	&--success {
+		--btn-bg-cl: var(--btn-success-bg-cl);
+		--btn-cl: var(--btn-success-cl);
+	}
+
+	&--warning {
+		--btn-bg-cl: var(--btn-warning-bg-cl);
+		--btn-cl: var(--btn-warning-cl);
+	}
+
+	&--danger {
+		--btn-bg-cl: var(--btn-danger-bg-cl);
+		--btn-cl: var(--btn-danger-cl);
+	}
+}
