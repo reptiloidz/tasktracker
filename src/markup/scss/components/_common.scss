@@ -1,16 +1,8 @@
+body,
 html {
-	box-sizing: border-box;
+	height: 100%;
 }
 
-body {
-	//font-size: var(--fz-sm);
-	//line-height: var(--lh-1);
-	//font-weight: var(--fw-n);
-	@include text(lg);
-	background-color: var(--body-bg-cl);
-	color: var(--body-cl);
-	font-family: var(--ff-rubik);
-	-webkit-font-smoothing: antialiased;
-	font-smoothing: antialiased;
-	text-rendering: optimizeLegibility;
+html {
+	box-sizing: border-box;
 }

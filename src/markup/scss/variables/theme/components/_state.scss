@@ -1,0 +1,28 @@
+:root {
+
+
+// MAIN
+// -----------------------------------------------
+
+--state-main-normal-bg-img: none;
+--state-main-hover-bg-img: var(--ca-black-10);
+
+--state-main-normal-shadow-cl: transparent;
+--state-main-hover-shadow-cl: transparent;
+--state-main-focus-shadow-cl: var(--ctx-border-selected);
+
+// -----------------------------------------------
+// MAIN
+
+
+// ERROR
+// -----------------------------------------------
+
+--state-error-hover-bg-img: var(--ctx-elements-background-error-hover);
+--state-error-hover-shadow-cl: transparent;
+
+// -----------------------------------------------
+// ERROR
+
+
+}

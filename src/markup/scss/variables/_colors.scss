@@ -1,16 +1,33 @@
 :root {
-	--cl-black: #000000;
-	--cl-gray-1: #585858;
-	--cl-gray-2: #5f5f5f;
-	--cl-gray-3: #6c6c6c;
-	--cl-gray-4: #ebebeb;
-	--cl-gray-5: #f6f6f6;
-	--cl-white: #ffffff;
-	--cl-blue-2: #e0e4ea;
-	--cl-blue-1: #d9e5f9;
-	--cl-blue-3: #f8f8fb;
-	--cl-orange-1: #fd633d;
-	--cl-orange-2: #ff9533;
-	--cl-red-1: #e74444;
-	--cl-green-1: #67cb65;
+
+
+$cl: (
+	black: #000000,
+	gray-1: #585858,
+	gray-2: #5F5F5F,
+	gray-3: #6C6C6C,
+	gray-4: #EBEBEB,
+	gray-5: #F6F6F6,
+	white: #FFFFFF,
+	blue-2: #E0E4EA,
+	blue-1: #D9E5F9,
+	blue-3: #F8F8FB,
+	orange-1: #FD633D,
+	orange-2: #FF9533,
+	red-1: #E74444,
+	green-1: #67CB65,
+);
+
+@include get-colors($cl);
+
+@include
+get-alpha($cl, 'black',
+	(
+		10: .1,
+	)
+);
+
+
 }
+
+

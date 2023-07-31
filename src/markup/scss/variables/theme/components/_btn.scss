@@ -8,14 +8,17 @@
 --btn-main-bg-cl: var(--cl-gray-5);
 --btn-main-cl: var(--cl-black);
 
---btn-primary-bg-cl: var();
+--btn-primary-bg-cl: var(--cl-gray-4);
 --btn-primary-cl: var(--cl-black);
+
+--btn-secondary-bg-cl: var(--cl-blue-1);
+--btn-secondary-cl: var(--cl-black);
 
 --btn-success-bg-cl: var(--cl-green-1);
 --btn-success-cl: var(--cl-white);
 
---btn-wwarning-bg-cl: var(--cl-orange-1);
---btn-wwarning-cl: var(--cl-white);
+--btn-warning-bg-cl: var(--cl-orange-1);
+--btn-warning-cl: var(--cl-white);
 
 --btn-danger-bg-cl: var(--cl-red-1);
 --btn-danger-cl: var(--cl-white);

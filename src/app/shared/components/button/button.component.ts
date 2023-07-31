@@ -1,7 +1,7 @@
 import {Component, ContentChild, Input, TemplateRef} from '@angular/core';
 
 @Component({
-	selector: '[b-shared-button]',
+	selector: '[app-shared-button]',
 	templateUrl: './button.component.html',
 })
 export class ButtonComponent {

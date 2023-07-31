@@ -1,0 +1,34 @@
+<!-- <div
+	class="field"
+	[ngClass]="{
+		'field--active': canMoveTitle,
+	}"
+>
+	<div
+		*ngIf="animatedTitle && placeholderTemplate"
+		class="field__title"
+	>
+		<ng-container [ngTemplateOutlet]="placeholderTemplate"></ng-container>
+	</div>
+
+	<input
+		[type]="type"
+		[placeholder]="placeholder"
+		class="field__control"
+		[ngClass]="inputClasses"
+		(focus)="focusHandler($event)"
+		(blur)="blurHandler($event)"
+	>
+</div> -->
+
+<div
+	class="form-group"
+	[ngClass]="inputWrapperClasses"
+>
+	<input
+		[type]="type"
+		[placeholder]="placeholder"
+		class="form-control"
+		[ngClass]="inputClasses"
+	>
+</div>

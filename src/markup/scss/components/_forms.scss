@@ -1,0 +1,155 @@
+.field {
+	@include transition(background-color .4s, box-shadow .4s, color .4s, border-color .4s, padding-top .4s);
+
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: var(--field-h);
+	padding: var(--field-py) var(--field-px);
+	border: 0;
+	border-radius: var(--field-brs);
+	outline: none;
+	background-color: var(--field-bg-cl);
+	box-shadow: inset 0 0 0 var(--field-shadow-w) var(--field-shadow-cl);
+
+	//--field-footer-label-mb: var(--sm-field-footer-label-mb);
+	//--field-footer-mt: var(--sm-field-footer-mt);
+	//--field-chips-item-ml: var(--sm-field-chips-item-ml);
+	//--field-badge-indent: var(--sm-field-badge-indent);
+	//--field-counter-r: var(--sm-field-counter-r);
+	//--field-counter-b: var(--sm-field-counter-b);
+	//--field-control-pt: var(--field-main-control-pt);
+	//
+	--field-control-h: calc(var(--field-h) - var(--field-shadow-w) * 2);
+	//
+	//--field-py: var(--field-main-py);
+	//
+	--field-bg-cl: var(--field-main-normal-bg-cl);
+	--field-cl: var(--field-main-normal-cl);
+	--field-shadow-cl: var(--field-main-normal-shadow-cl);
+	//
+	//--field-placeholder-cl: var(--field-main-placeholder-cl);
+	//--field-footer-label-cl: var(--field-main-footer-label-cl);
+	//--field-badge-cl: var(--field-main-badge-cl);
+	//--field-addon-cl: var(--field-main-addon-cl);
+	//--field-counter-cl: var(--field-main-counter-cl);
+	//--field-title-cl: var(--field-main-title-cl);
+	//--field-double-pseudo-indent: var(--sm-field-double-pseudo-indent);
+	//--field-double-pseudo-bg-cl: var(--field-double-pseudo-normal-bg-cl);
+	//--field-control-autofill-bg-cl: var(--field-main-control-autofill-bg-cl);
+
+	&:focus-within {
+		--field-bg-cl: var(--field-main-focus-bg-cl);
+		--field-cl: var(--field-main-focus-cl);
+		--field-shadow-cl: var(--field-main-focus-shadow-cl);
+	}
+
+	&:focus {
+		--field-bg-cl: var(--field-main-focus-bg-cl);
+		--field-cl: var(--field-main-focus-cl);
+		--field-shadow-cl: var(--field-main-focus-shadow-cl);
+	}
+
+	&:hover {
+		--field-bg-cl: var(--field-main-hover-bg-cl);
+		--field-cl: var(--field-main-hover-cl);
+		--field-shadow-cl: var(--field-main-hover-shadow-cl);
+
+		.field__control {
+			&:-webkit-autofill {
+				--field-bg-cl: var(--field-control-autofill-bg-cl);
+			}
+		}
+	}
+
+	&__control {
+		@include transition(color .4s, padding-top .4s, box-shadow .4s);
+		@include text(sm);
+
+		z-index: 0;
+		display: flex;
+		align-items: center;
+		width: 100%;
+		min-width: 0;
+		height: var(--field-control-h);
+		padding: calc(var(--field-control-pt) / 2 + var(--field-shadow-w) * 2) 0 0 0;
+		border: 0;
+		background-color: transparent;
+		color: var(--field-cl);
+		font-family: var(--ff-aeroport);
+		white-space: nowrap;
+		resize: none;
+		-webkit-text-fill-color: var(--field-cl);
+
+		&:focus {
+			outline: none;
+		}
+
+		&:-webkit-autofill {
+			box-shadow: inset 0 0 0 var(--field-h) var(--field-bg-cl);
+		}
+
+		// Placeholder
+		&::placeholder {
+			color: var(--field-placeholder-cl);
+
+			/*
+				Override Firefox's unusual default opacity;
+				see https://github.com/twbs/bootstrap/pull/11526.
+			*/
+			opacity: 1;
+			-webkit-text-fill-color: var(--field-placeholder-cl);
+		}
+
+		&::-webkit-strong-password-auto-fill-button {
+			position: absolute;
+			right: 0;
+			visibility: hidden;
+		}
+
+		/*
+			Disabled and read-only inputs
+
+			HTML5 says that controls under a fieldset > legend:first-child won't be
+			disabled if the fieldset is disabled. Due to implementation difficulty, we
+			don't honor that edge case; we style them as disabled anyway.
+		*/
+		&:disabled,
+		&[readonly] {
+			/*
+				iOS fix for unreadable disabled content;
+				see https://github.com/twbs/bootstrap/issues/11655.
+			*/
+			opacity: 1;
+		}
+
+		&::-ms-reveal,
+		&::-ms-clear {
+			display: none;
+		}
+	}
+
+	&__title {
+		@include transition(background-color .4s, top .4s, transform .4s, font-size .4s, padding .4s);
+		@include text(sm);
+
+		position: absolute;
+		top: 50%;
+		right: var(--field-px);
+		left: var(--field-px);
+		z-index: 1;
+		display: flex;
+		padding-top: var(--field-title-pt, 0);
+		color: var(--field-title-cl);
+		pointer-events: none;
+		user-select: none;
+		transform: translateY(-50%);
+
+		&--label {
+
+			top: 0;
+			transform: translateY(0);
+		}
+	}
+}

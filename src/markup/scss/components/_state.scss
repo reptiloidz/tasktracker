@@ -1,0 +1,29 @@
+.state {
+	@include transition(transform .4s, box-shadow .4s);
+
+	--state-shadow-cl: var(--state-main-normal-shadow-cl);
+	--state-bg-img: var(--state-main-normal-bg-img);
+
+	background-image: linear-gradient(0deg, var(--state-bg-img), var(--state-bg-img));
+	box-shadow: inset 0 0 0 1px var(--state-shadow-cl);
+
+	&:focus {
+		--state-shadow-cl: var(--state-main-focus-shadow-cl);
+	}
+
+	&:active {
+		transform: scale(.95);
+	}
+
+	&:hover {
+		--state-bg-img: var(--state-main-hover-bg-img);
+		--state-shadow-cl: var(--state-main-hover-shadow-cl);
+	}
+
+	&[class*='--error'] {
+		&:hover {
+			--state-bg-img: var(--state-error-hover-bg-img);
+			--state-shadow-cl: var(--state-error-hover-shadow-cl);
+		}
+	}
+}

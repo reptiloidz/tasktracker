@@ -1,0 +1,21 @@
+@mixin transition($transition...) {
+	@if length($transition) == 0 {
+		$transition: $transition-main;
+	}
+
+	@if length($transition) > 1 {
+		@each $value in $transition {
+			@if $value == null or $value == none {
+				@warn "The keyword 'none' or 'null' must be used as a single argument.";
+			}
+		}
+	}
+
+	@if nth($transition, 1) != null {
+		transition: $transition;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
+}

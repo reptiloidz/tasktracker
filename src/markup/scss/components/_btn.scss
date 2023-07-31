@@ -23,6 +23,11 @@
 		--btn-cl: var(--btn-primary-cl);
 	}
 
+	&--secondary {
+		--btn-bg-cl: var(--btn-secondary-bg-cl);
+		--btn-cl: var(--btn-secondary-cl);
+	}
+
 	&--success {
 		--btn-bg-cl: var(--btn-success-bg-cl);
 		--btn-cl: var(--btn-success-cl);

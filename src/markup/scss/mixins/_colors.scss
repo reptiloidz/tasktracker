@@ -1,0 +1,36 @@
+@use 'sass:string';
+@use 'sass:list';
+@use 'sass:map';
+
+@mixin get-colors($map, $prefix: 'cl') {
+	@each $prop, $val in $map {
+		$val: red($val) + ', ' + green($val) + ', ' + blue($val);
+
+		#{'--' + $prop}: string.unquote($val);
+	}
+
+	@each $prop in $map {
+		$prop: list.nth($prop, 1);
+
+		#{'--' + $prefix + '-' + $prop}: rgb(var(#{'--' + $prop}));
+	}
+}
+
+
+@mixin get-alpha($palette, $cl, $ca, $prefix: 'ca') {
+	$i: 10;
+
+	@if (type-of($ca) == list) {
+		@each $alpha in $ca {
+			#{'--' + $prefix + '-' + $cl + '-' + $i}: rgba(var(#{'--' + $cl}), $alpha);
+
+			$i: $i + 10;
+		}
+	}
+
+	@if (type-of($ca) == map) {
+		@each $postfix, $alpha in $ca {
+			#{'--' + $prefix + '-' + $cl + '-' + $postfix}: rgba(var(#{'--' + $cl}), $alpha);
+		}
+	}
+}
