@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {Component, HostBinding, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {User} from '../shared/interfaces/login';
+import {AuthService} from '../client/shared/services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
 	selector: 'app-login-page',
@@ -11,24 +14,27 @@ export class LoginPageComponent implements OnInit {
 	minPasswordLength: number = 6;
 	submitted: boolean = false;
 	message: string = '';
+	user!: User;
 
-	constructor() {}
+	@HostBinding('class') class = 'd-flex flex-column flex-grow-1';
+
+	constructor(
+		public auth: AuthService,
+		private fb: FormBuilder,
+		private router: Router,
+	){}
 
 	ngOnInit(): void {
-		this.form = new FormGroup({
-			email: new FormControl('',
-				[
-					Validators.required,
-					Validators.email,
-				]
-			),
+		this.form = this.fb.group({
+			email:['', [
+				Validators.required,
+				Validators.email,
+			]],
 
-			password: new FormControl('',
-				[
-					Validators.required,
-					Validators.minLength(this.minPasswordLength),
-				]
-			)
+			password: ['', [
+				Validators.required,
+				Validators.minLength(this.minPasswordLength),
+			]]
 		})
 	}
 
@@ -46,5 +52,18 @@ export class LoginPageComponent implements OnInit {
 		}
 
 		this.submitted = true;
+
+		this.user = {
+			email: this.form.value.email,
+			password: this.form.value.password,
+		}
+
+		this.auth.login(this.user).subscribe(() => {
+			this.form.reset();
+			this.router.navigate(['/client', 'home']).then();
+			this.submitted = false;
+		}, () => {
+			this.submitted = false;
+		});
 	}
 }

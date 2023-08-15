@@ -1,4 +1,4 @@
-<div class="container pt-5">
+<div class="container pb-5 my-auto">
 	<div class="row">
 		<div class="col-md-8 offset-md-2">
 			<h1 class="text-center mb-4">
@@ -9,7 +9,6 @@
 				[formGroup]="form"
 				(ngSubmit)="submit()"
 			>
-
 				<div class="form-group">
 					<input
 						class="form-control"
@@ -28,6 +27,9 @@
 							Введите корректный email
 						</ng-container>
 					</p>
+					<p class="d-block invalid-feedback" *ngIf="auth.errorEmail$ | async as errorEmail">
+						{{ errorEmail }}
+					</p>
 				</div>
 				<div class="form-group">
 					<input
@@ -40,6 +42,7 @@
 							'is-valid': password?.valid && !message
 						}"
 					>
+					<!--TODO: type="current-password"-->
 
 					<p *ngIf="password?.touched && password?.invalid" class="d-block invalid-feedback">
 						<ng-container *ngIf="password?.errors?.['required']">
@@ -65,20 +68,10 @@
 							</span>
 						</ng-container>
 					</p>
+					<p class="d-block invalid-feedback" *ngIf="auth.errorPassword$ | async as errorPassword">
+						{{ errorPassword }}
+					</p>
 				</div>
-
-				<!-- <app-shared-text-input
-					placeholder="Адрес почты"
-					formControlName="email"
-				>
-				</app-shared-text-input> -->
-				<!-- <app-shared-text-input
-					type="password"
-					placeholder="Пароль"
-					inputWrapperClasses="mt-2"
-					[control]="password"
-				>
-				</app-shared-text-input> -->
 
 				<div class="form-check my-3">
 					<input
@@ -94,23 +87,14 @@
 					</label>
 				</div>
 
-				<div class="d-flex flex-column flex-md-row pt-3 gap-2">
-					<button
-						app-shared-button
-						class="btn btn-primary flex-grow-1"
-						[disabled]="form.invalid || submitted"
-					>
-						Войти
-					</button>
-
-					<!-- <button
-						app-shared-button
-						class="btn btn-outline-primary flex-grow-1"
-						[routerLink]="'/'"
-					>
-						Назад
-					</button> -->
-				</div>
+				<button
+					app-shared-button
+					class="btn btn-primary w-100"
+					[disabled]="form.invalid || submitted"
+					type="submit"
+				>
+					Войти
+				</button>
 			</form>
 		</div>
 	</div>
