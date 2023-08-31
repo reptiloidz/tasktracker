@@ -1,7 +1,7 @@
 <div class="row gx-0 h-100">
-	<div class="col-md-4 bg-light h-auto p-5">
-		<nav class="navbar">
-			<ul class="navbar-nav">
+	<div class="col-md-4 bg-light h-auto">
+		<nav class="navbar flex-column">
+			<ul class="navbar-nav border-1 border-bottom border-dark w-100 px-5 pt-5 pb-3">
 				<li class="nav-item">
 					<a
 						class="nav-link"
@@ -39,6 +39,17 @@
 					</a>
 				</li>
 			</ul>
+			<ul class="navbar-nav px-5 pt-3 pb-5 w-100">
+				<li class="nav-item">
+					<button
+						app-shared-button
+						class="nav-link"
+						(click)="modal = !modal"
+					>
+						Новая доска
+					</button>
+				</li>
+			</ul>
 		</nav>
 	</div>
 	<div class="col-md-8">
@@ -48,3 +59,9 @@
 		</div>
 	</div>
 </div>
+
+<app-modal
+	(close)="modal = false"
+	*ngIf="modal"
+	[ngModalClass]="modal ? 'modal-open' : ''"
+></app-modal>

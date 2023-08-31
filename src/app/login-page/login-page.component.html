@@ -2,8 +2,18 @@
 	<div class="row">
 		<div class="col-md-8 offset-md-2">
 			<h1 class="text-center mb-4">
-				Выполните вход
+				{{loginTitle}}
 			</h1>
+			<div
+				*ngIf="loginSubtitle"
+				class="d-flex bg-primary bg-opacity-10 rounded-2 px-3 py-2 mb-4"
+			>
+				<i class="bi bi-info-circle"></i>
+
+				<p class="px-2 mb-0">
+					{{loginSubtitle}}
+				</p>
+			</div>
 
 			<form
 				[formGroup]="form"
@@ -13,6 +23,7 @@
 					<input
 						class="form-control"
 						formControlName="email"
+						autocomplete="username"
 						placeholder="Адрес почты"
 						[ngClass]="{
 							'is-invalid': email?.invalid && email?.touched,
@@ -27,22 +38,19 @@
 							Введите корректный email
 						</ng-container>
 					</p>
-					<p class="d-block invalid-feedback" *ngIf="auth.errorEmail$ | async as errorEmail">
-						{{ errorEmail }}
-					</p>
 				</div>
 				<div class="form-group">
 					<input
 						class="form-control mt-2"
 						formControlName="password"
 						placeholder="Пароль"
+						autocomplete="current-password"
 						type="password"
 						[ngClass]="{
 							'is-invalid': password?.invalid && password?.touched,
 							'is-valid': password?.valid && !message
 						}"
 					>
-					<!--TODO: type="current-password"-->
 
 					<p *ngIf="password?.touched && password?.invalid" class="d-block invalid-feedback">
 						<ng-container *ngIf="password?.errors?.['required']">
@@ -68,8 +76,8 @@
 							</span>
 						</ng-container>
 					</p>
-					<p class="d-block invalid-feedback" *ngIf="auth.errorPassword$ | async as errorPassword">
-						{{ errorPassword }}
+					<p class="d-block invalid-feedback" *ngIf="errorMsg">
+						{{ errorMsg }}
 					</p>
 				</div>
 

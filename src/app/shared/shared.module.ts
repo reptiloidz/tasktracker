@@ -7,6 +7,8 @@ import {TextInputComponent} from './components/text-input/text-input.component';
 import {RouterLink} from '@angular/router';
 import {DeclensionDirective} from '../../../.history/src/app/shared/directives/dectlension.directive_20230731231528';
 import {HttpClientModule} from '@angular/common/http';
+import {ModalComponent} from './components/modal/modal.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -15,11 +17,13 @@ import {HttpClientModule} from '@angular/common/http';
 		ButtonComponent,
 		TextInputComponent,
 		DeclensionDirective,
+		ModalComponent,
 	],
 	imports: [
 		CommonModule,
 		RouterLink,
 		HttpClientModule,
+		ReactiveFormsModule,
 	],
 	exports: [
 		HeaderComponent,
@@ -28,7 +32,9 @@ import {HttpClientModule} from '@angular/common/http';
 		TextInputComponent,
 		DeclensionDirective,
 		HttpClientModule,
+		ModalComponent,
 	],
 })
 
-export class SharedModule {}
+export class SharedModule {
+}

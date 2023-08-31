@@ -1,0 +1,24 @@
+.dynamic-modal {
+	position: absolute;
+	left: 50%;
+	top: 40%;
+	max-width: 800px;
+	z-index: 99;
+	transform: translate(-50%, -50%);
+	background: #ffffff;
+}
+
+.dynamic-modal-darker {
+	background: #0000003f;
+	height: 100%;
+	left: 0;
+	pointer-events: none;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 98;
+
+	&.modal-open {
+		pointer-events: auto;
+	}
+}

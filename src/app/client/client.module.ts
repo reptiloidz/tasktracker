@@ -10,6 +10,7 @@ import {TaskComponent} from './task/task.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import {SharedModule} from '../shared/shared.module';
 import {LoginPageComponent} from '../login-page/login-page.component';
+import {AuthGuard} from './shared/services/auth.guard';
 
 const childRoutes: Routes = [
 	{
@@ -24,18 +25,22 @@ const childRoutes: Routes = [
 			{
 				path: 'home',
 				component: HomePageComponent,
+				canActivate: [AuthGuard],
 			},
 			{
 				path: 'profile',
 				component: ProfileComponent,
+				canActivate: [AuthGuard],
 			},
 			{
 				path: 'task-manager',
 				component: TaskManagerComponent,
+				canActivate: [AuthGuard],
 			},
 			{
 				path: 'task/:id',
 				component: TaskComponent,
+				canActivate: [AuthGuard],
 			},
 		]
 	},

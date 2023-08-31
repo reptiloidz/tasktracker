@@ -1,1 +1,40 @@
-<p>task-manager works!</p>
+<h1>
+	Рабочие пространства
+</h1>
+
+<div
+	*ngIf="errorMsg"
+>
+	{{errorMsg}}
+</div>
+<div
+	*ngFor="let workspace of workspaces"
+	class="d-flex align-items-start"
+>
+	<div>
+		<div class="">
+			{{workspace.title}}
+		</div>
+		<div class="">
+			{{workspace.description}}
+		</div>
+	</div>
+	<button
+		app-shared-button
+		class="btn btn-primary"
+	>
+		Доски
+	</button>
+	<button
+		app-shared-button
+		class="btn btn-primary"
+	>
+		Участники
+	</button>
+	<button
+		app-shared-button
+		class="btn btn-primary"
+	>
+		Настройки
+	</button>
+</div>

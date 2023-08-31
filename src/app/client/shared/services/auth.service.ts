@@ -4,19 +4,16 @@ import {FbAuthResponse, User} from '../../../shared/interfaces/login';
 import {catchError, Observable, Subject, tap, throwError} from 'rxjs';
 import {environment} from '../../../../environments/environment.development';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AuthService {
 
-	expDateSet!: Date;
-	expDateGet!: Date;
-	fbResponse!: FbAuthResponse;
-	public errorPassword$: Subject<string> = new Subject<string>();
-	public errorEmail$: Subject<string> = new Subject<string>();
+	private expDateSet!: Date;
+	private expDateGet!: Date;
+	private fbResponse!: FbAuthResponse;
+
 	constructor(
 		private http: HttpClient,
-	) {
-
-	}
+	) {}
 
 	get token(): string | null {
 		this.expDateGet = new Date(localStorage.getItem('fb-token-exp') as string);
@@ -30,38 +27,18 @@ export class AuthService {
 	}
 	login(user: User): Observable<any> {
 		user.returnSecureToken = true;
+
 		return this.http.post(
 			`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,
 			user
 		)
 			.pipe(
-				tap(this.setToken),
-				catchError(this.handleError.bind(this)),
+				tap((response: object) => this.setToken(response)),
 			);
 	}
 
 	logout(): void {
 		this.setToken(null);
-	}
-
-	private handleError(error: HttpErrorResponse) {
-		const { message } = error.error.error;
-
-		console.log(message);
-
-		switch (message) {
-			case 'INVALID_PASSWORD':
-				this.errorPassword$.next('Неверный пароль');
-				break;
-			case 'INVALID_EMAIL':
-				this.errorEmail$.next('Неверный email');
-				break;
-			case 'EMAIL_NOT_FOUND':
-				this.errorEmail$.next('Такого адреса не существует');
-				break;
-		}
-
-		return throwError(error);
 	}
 
 	isAuth(): boolean {
@@ -72,7 +49,9 @@ export class AuthService {
 	private setToken(response: FbAuthResponse | object | null): void {
 		if (response) {
 			this.fbResponse = response as FbAuthResponse;
+			console.log(response);
 			this.expDateSet = new Date(new Date().getTime() + +this.fbResponse.expiresIn * 1000);
+			console.log(this.fbResponse);
 			localStorage.setItem('fb-token', this.fbResponse.idToken);
 			localStorage.setItem('fb-token-exp', this.expDateSet.toString());
 		} else {
