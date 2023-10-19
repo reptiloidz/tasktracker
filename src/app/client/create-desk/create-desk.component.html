@@ -1,9 +1,9 @@
 <div
-	class="dynamic-modal container p-4 rounded-2"
+	class="dynamic-modal p-4 rounded-2"
 >
-	<div class="d-flex justify-content-between">
-		<h2>
-			Новое рабочее пространство
+	<div class="d-flex justify-content-between mb-3">
+		<h2 class="h2 mb-0">
+			Новая доска
 		</h2>
 		<button
 			(click)="close.emit()"
@@ -17,26 +17,26 @@
 		(ngSubmit)="submit()"
 	>
 		<input
-			class="form-control mt-2"
+			class="form-control"
 			placeholder="Название"
 			type="text"
 			formControlName="title"
 		>
 
-		<textarea
-			class="form-control"
-			aria-label="With textarea"
-			placeholder="Описание"
-			formControlName="description"
-		></textarea>
+<!--		<textarea-->
+<!--			class="form-control mt-2"-->
+<!--			aria-label="With textarea"-->
+<!--			placeholder="Описание"-->
+<!--			formControlName="description"-->
+<!--		></textarea>-->
 
 		<button
 			app-shared-button
-			class="btn btn-primary"
+			class="btn btn-primary mt-4"
 			type="submit"
 			[disabled]="form.invalid || submitted"
 		>
-			Продолжить
+			Создать
 		</button>
 	</form>
 </div>

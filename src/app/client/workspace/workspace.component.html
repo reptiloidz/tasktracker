@@ -1,0 +1,50 @@
+<ng-container *ngIf="workspace$ | async as workspace; else loading">
+	<h2 class="display-4 text-primary">
+		{{workspace.title}}
+	</h2>
+
+	<p>
+		<ng-container
+			*ngFor="let desk of desks"
+		>
+			<ng-container
+				*ngIf="desk.relatedTo === workspace.id"
+			>
+				<a
+					app-shared-button
+					class="btn btn-outline-secondary"
+					[routerLink]="['/client', 'desk', desk.id]"
+				>
+					{{desk.title}}
+				</a>
+				<button
+					app-shared-button
+					class="btn btn-sm btn-outline-danger"
+					(click)="remove(desk.id)"
+				>
+					Удалить
+				</button>
+			</ng-container>
+		</ng-container>
+	</p>
+
+	<button
+		app-shared-button
+		class="btn btn-outline-secondary"
+		(click)="newDesk(workspace.id)"
+	>
+		Создать доску
+	</button>
+</ng-container>
+
+<app-create-desk
+	(close)="createDesk = false"
+	*ngIf="createDesk"
+	[ngModalClass]="createDesk ? 'modal-open' : ''"
+></app-create-desk>
+
+<ng-template #loading>
+	<div class="d-flex flex-column">
+		<div class="spinner-border text-dark m-auto" role="status"></div>
+	</div>
+</ng-template>

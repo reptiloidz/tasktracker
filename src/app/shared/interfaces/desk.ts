@@ -1,7 +1,13 @@
 export interface Workspace {
 	id?: string;
-	title: string;
+	title?: string;
 	description?: string;
+}
+
+export interface Desk {
+	id?: string;
+	title: string;
+	relatedTo?: any;
 }
 
 export interface FbCreateResponse {

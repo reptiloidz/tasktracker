@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Workspace} from '../../interfaces/desk';
-import {WorkspaceService} from '../../services/workspace.service';
+import {Desk, Workspace} from '../../shared/interfaces/desk';
+import {DeskService} from '../../shared/services/desk.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-	selector: 'app-modal',
-	templateUrl: './modal.component.html',
+	selector: 'app-create-desk',
+	templateUrl: './create-desk.component.html',
 })
-export class ModalComponent implements OnInit {
-
+export class CreateDeskComponent implements OnInit {
 	@Input() ngModalClass: string = '';
 	@Output() close = new EventEmitter<void>();
 	// modal: boolean = false;
@@ -17,18 +17,17 @@ export class ModalComponent implements OnInit {
 
 	constructor(
 		private fb: FormBuilder,
-		private workspaceService: WorkspaceService,
-	){}
+		private deskService: DeskService,
+		private route: ActivatedRoute,
+	) {
+	}
 
 	ngOnInit(): void {
 		this.form = this.fb.group({
 			title: ['', [
 				Validators.required,
 			]],
-
-			description: ['', [
-			]]
-		})
+		});
 	}
 
 	submit() {
@@ -36,16 +35,17 @@ export class ModalComponent implements OnInit {
 			return;
 		}
 
-		const workspace: Workspace = {
+		const desk: Desk = {
 			title: this.form.value.title,
-			description: this.form.value.description,
-		};
+			relatedTo: this.route.snapshot.params?.['id'],
+		}
 
-		this.workspaceService.createDesk(workspace).subscribe(() => {
+		this.deskService.createDesk(desk).subscribe(() => {
 			this.form.reset();
-		})
+		});
 
 		this.submitted = true;
-	}
 
+		this.close.emit();
+	}
 }

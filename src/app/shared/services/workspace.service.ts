@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
-import {FbCreateResponse, Workspace} from '../interfaces/desk';
+import {Desk, FbCreateResponse, Workspace} from '../interfaces/desk';
 import {environment} from '../../../environments/environment';
 
 @Injectable({providedIn: 'root'})
@@ -11,7 +11,7 @@ export class WorkspaceService {
 	) {
 	}
 
-	createDesk(workspace: Workspace): Observable<Workspace> {
+	createWorkspace(workspace: Workspace): Observable<Workspace> {
 		return this.http.post<Workspace>(`${environment.fbDbUrl}/workspace.json`, workspace)
 			.pipe(map((response: FbCreateResponse | any) => {
 				return {
@@ -34,5 +34,21 @@ export class WorkspaceService {
 				}
 				return null;
 			}))
+	}
+
+	getWorkspaceById(id: string): Observable<Workspace> {
+		return this.http.get<Workspace>(`${environment.fbDbUrl}/workspace/${id}.json`)
+			.pipe(
+				map((workspace: Workspace) => {
+					return {
+						...workspace,
+						id,
+					};
+				})
+			);
+	}
+
+	remove(id: string | undefined): Observable<void> {
+		return this.http.delete<void>(`${environment.fbDbUrl}/workspace/${id}.json`);
 	}
 }

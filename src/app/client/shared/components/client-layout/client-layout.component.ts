@@ -35,6 +35,9 @@ export class ClientLayoutComponent implements OnInit, OnDestroy {
 		this.router.navigate(['/', 'login']).then();
 	}
 
+	showHeader(): boolean {
+		return !this.router.url.includes('client/desk');
+	}
 	ngOnDestroy() {
 		// this.subscriptions?.unsubscribe();
 	}

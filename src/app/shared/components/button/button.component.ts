@@ -9,6 +9,9 @@ export class ButtonComponent {
 	/** Классы внутренней обертки */
 	@Input() btnInnerClass: string | null = null;
 
+	/** Классы иконки */
+	@Input() iconClass: string | null = null;
+
 	/** Классы текста */
 	@Input() textClass: string | null = null;
 

@@ -1,0 +1,63 @@
+<ng-container *ngIf="desk$ | async as desk; else loading">
+	<h2 class="display-4 text-primary">
+		{{desk.title}}
+	</h2>
+	<p>{{desk.relatedTo}}</p>
+</ng-container>
+<ul class="list-unstyled row g-3">
+	<li class="col-3">
+		<div class="border border-secondary px-2 py-3 rounded-2">
+			<h3 class="fw-light px-3">Нужно сделать</h3>
+
+			<button
+				app-shared-button
+				class="btn btn-outline-secondary border-0"
+				iconClass="bi bi-plus"
+			>
+				Добавить карточку
+			</button>
+		</div>
+
+	</li>
+	<li class="col-3">
+		<div class="border border-secondary px-2 py-3 rounded-2">
+			<h3 class="fw-light px-3">В процессе</h3>
+
+			<button
+				app-shared-button
+				class="btn btn-outline-secondary border-0"
+				iconClass="bi bi-plus"
+			>
+				Добавить карточку
+			</button>
+		</div>
+	</li>
+	<li class="col-3">
+		<div class="border border-secondary px-2 py-3 rounded-2">
+			<h3 class="fw-light px-3">Готово</h3>
+
+			<button
+				app-shared-button
+				class="btn btn-outline-secondary border-0"
+				iconClass="bi bi-plus"
+			>
+				Добавить карточку
+			</button>
+		</div>
+	</li>
+
+	<li class="col-3">
+		<button
+			app-shared-button
+			class="btn btn-outline-secondary"
+		>
+			Добавить колонку
+		</button>
+	</li>
+</ul>
+
+<ng-template #loading>
+	<div class="d-flex flex-column">
+		<div class="spinner-border text-dark m-auto" role="status"></div>
+	</div>
+</ng-template>

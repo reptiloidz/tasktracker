@@ -2,6 +2,11 @@
 	class="btn__inner"
 	[ngClass]="btnInnerClass"
 >
+	<ng-container
+		*ngIf="iconClass"
+	>
+		<i [ngClass]="iconClass"></i>
+	</ng-container>
 	<span
 		class="btn__text"
 		[ngClass]="textClass"

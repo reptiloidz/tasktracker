@@ -1,7 +1,7 @@
 <div class="row gx-0 h-100">
-	<div class="col-md-4 bg-light h-auto">
+	<div class="col-md-4 bg-light bg-opacity-50 h-auto">
 		<nav class="navbar flex-column">
-			<ul class="navbar-nav border-1 border-bottom border-dark w-100 px-5 pt-5 pb-3">
+			<ul class="navbar-nav border-bottom w-100 px-5 pt-5 pb-3">
 				<li class="nav-item">
 					<a
 						class="nav-link"
@@ -26,7 +26,7 @@
 						[routerLink]="['/client', 'task-manager']"
 						routerLinkActive="text-primary"
 					>
-						Доски
+						Рабочие пространства
 					</a>
 				</li>
 				<li class="nav-item">
@@ -43,25 +43,28 @@
 				<li class="nav-item">
 					<button
 						app-shared-button
-						class="nav-link"
+						class="text-start nav-link"
 						(click)="modal = !modal"
 					>
-						Новая доска
+						Новое рабочее пространство
 					</button>
 				</li>
 			</ul>
 		</nav>
 	</div>
-	<div class="col-md-8">
-		<app-header></app-header>
+
+	<div class="col-md-8 shadow-sm">
+		<app-header
+			*ngIf="showHeader()"
+		></app-header>
 		<div class="p-3">
 			<router-outlet></router-outlet>
 		</div>
 	</div>
 </div>
 
-<app-modal
+<app-create-workspace
 	(close)="modal = false"
 	*ngIf="modal"
 	[ngModalClass]="modal ? 'modal-open' : ''"
-></app-modal>
+></app-create-workspace>

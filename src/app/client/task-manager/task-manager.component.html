@@ -1,4 +1,4 @@
-<h1>
+<h1 class="display-4">
 	Рабочие пространства
 </h1>
 
@@ -7,34 +7,53 @@
 >
 	{{errorMsg}}
 </div>
+
 <div
 	*ngFor="let workspace of workspaces"
-	class="d-flex align-items-start"
+	class="py-4"
 >
-	<div>
-		<div class="">
-			{{workspace.title}}
+	<div class="d-flex align-items-start gap-2 py-2">
+		<div class="flex-grow-1">
+			<a
+				class="h5 mb-0"
+				[routerLink]="['/client', 'workspace', workspace.id]"
+			>
+				{{workspace.title}}
+			</a>
+			<div class="text-secondary">
+				{{workspace.description}}
+			</div>
 		</div>
-		<div class="">
-			{{workspace.description}}
+		<div class="d-flex gap-2">
+			<button
+				app-shared-button
+				class="btn btn-sm btn-outline-secondary"
+			>
+				Доски
+			</button>
+			<button
+				app-shared-button
+				class="btn btn-sm btn-outline-secondary"
+			>
+				Участники
+			</button>
+			<button
+				app-shared-button
+				class="btn btn-sm btn-outline-secondary"
+			>
+				Настройки
+			</button>
+			<button
+				app-shared-button
+				class="btn btn-sm btn-outline-danger"
+				(click)="remove(workspace.id)"
+			>
+				Удалить
+			</button>
 		</div>
 	</div>
-	<button
-		app-shared-button
-		class="btn btn-primary"
-	>
-		Доски
-	</button>
-	<button
-		app-shared-button
-		class="btn btn-primary"
-	>
-		Участники
-	</button>
-	<button
-		app-shared-button
-		class="btn btn-primary"
-	>
-		Настройки
-	</button>
+
+	<div class="d-flex flex-wrap gap-2">
+
+	</div>
 </div>

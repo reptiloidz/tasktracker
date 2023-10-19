@@ -9,14 +9,14 @@ import { HomePageComponent } from './home-page/home-page.component';
 import {SharedModule} from './shared/shared.module';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {AuthService} from './client/shared/services/auth.service';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {AuthInterceptor} from './shared/interseptors/auth.interceptor';
+// import {HTTP_INTERCEPTORS} from '@angular/common/http';
+// import {AuthInterceptor} from './shared/interseptors/auth.interceptor';
 
-const INTERCEPTOR_PROVIDER: Provider = {
-	provide: HTTP_INTERCEPTORS,
-	multi: true,
-	useClass: AuthInterceptor,
-}
+// const INTERCEPTOR_PROVIDER: Provider = {
+// 	provide: HTTP_INTERCEPTORS,
+// 	multi: true,
+// 	useClass: AuthInterceptor,
+// }
 
 @NgModule({
 	declarations: [
@@ -34,7 +34,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
 	],
 	providers: [
 		AuthService,
-		INTERCEPTOR_PROVIDER,
+		// INTERCEPTOR_PROVIDER,
 	],
 	exports: [
 		MainLayoutComponent

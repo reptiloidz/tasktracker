@@ -82,13 +82,33 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 			password: this.form.value.password,
 		}
 
-		this.auth.login(this.user).subscribe(() => {
-			this.form.reset();
-			this.router.navigate(['/client', 'home']).then();
-			this.submitted = false;
-		}, () => {
-			this.submitted = false;
-		});
+		this.subscription.add(
+			this.auth.login(this.user).subscribe({
+				next: () => {
+					this.form.reset();
+					this.router.navigate(['/client', 'home']).then();
+					this.submitted = false;
+				},
+				error: (error) => {
+					this.submitted = false;
+
+					this.error = error.error.error.message;
+					// console.log(error);
+
+					switch (true) {
+						case this.error.includes('INVALID_EMAIL'):
+							this.errorMsg = 'Неверный адрес';
+							break;
+						case this.error.includes('INVALID_PASSWORD'):
+							this.errorMsg = 'Неверный пароль';
+							break;
+						case this.error.includes('EMAIL_NOT_FOUND'):
+							this.errorMsg = 'Введите существующий адрес';
+							break;
+					}
+				}
+			})
+		);
 	}
 
 	ngOnDestroy() {

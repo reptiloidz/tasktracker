@@ -1,0 +1,48 @@
+<div
+	class="dynamic-modal p-4 rounded-2"
+>
+	<div class="d-flex justify-content-between mb-3">
+		<h2 class="h2 mb-0">
+			Новое рабочее пространство
+		</h2>
+		<button
+			(click)="close.emit()"
+			aria-label="Close"
+			class="btn-close m-2 flex-shrink-0"
+			type="button"
+		></button>
+	</div>
+	<form
+		[formGroup]="form"
+		(ngSubmit)="submit()"
+	>
+		<input
+			class="form-control"
+			placeholder="Название"
+			type="text"
+			formControlName="title"
+		>
+
+		<textarea
+			class="form-control mt-2"
+			aria-label="With textarea"
+			placeholder="Описание"
+			formControlName="description"
+		></textarea>
+
+		<button
+			app-shared-button
+			class="btn btn-primary mt-4"
+			type="submit"
+			[disabled]="form.invalid || submitted"
+		>
+			Продолжить
+		</button>
+	</form>
+</div>
+
+<div
+	(click)="close.emit()"
+	[ngClass]="ngModalClass"
+	class="dynamic-modal-darker"
+></div>
